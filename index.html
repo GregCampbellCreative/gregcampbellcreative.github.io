@@ -21,7 +21,7 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: #2a3f56;
+      background: #1a1a3a;
       color: #dde3eb;
       min-height: 100vh;
       display: flex;
@@ -32,8 +32,16 @@
     .bg {
       position: fixed;
       inset: 0;
-      background: linear-gradient(105deg, #243649 0%, #2e4560 45%, #364f6b 100%);
       z-index: 0;
+      background-color: #1a1a3a;
+      background-image:
+        radial-gradient(ellipse 55% 80% at 5%  100%, rgba(120,30,160,0.95)  0%, rgba(100,20,140,0.6) 35%, transparent 65%),
+        radial-gradient(ellipse 45% 60% at 35% 90%,  rgba(180,50,120,0.90)  0%, rgba(160,40,100,0.5) 40%, transparent 65%),
+        radial-gradient(ellipse 50% 55% at 70% 75%,  rgba(210,80,80,0.75)   0%, rgba(190,60,60,0.4)  40%, transparent 62%),
+        radial-gradient(ellipse 60% 50% at 95% 55%,  rgba(100,60,200,0.80)  0%, rgba(80,50,180,0.45) 40%, transparent 65%),
+        radial-gradient(ellipse 70% 45% at 60% 10%,  rgba(40,80,200,0.85)   0%, rgba(30,60,180,0.5)  40%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 15% 20%,  rgba(60,30,130,0.90)   0%, rgba(50,20,110,0.5)  40%, transparent 62%),
+        linear-gradient(170deg, #0e0e28 0%, #1a1040 50%, #0a0a20 100%);
     }
 
     /* ── Layout shell ── */
@@ -543,7 +551,7 @@
     </nav>
 
     <main class="content" id="content" aria-live="polite">
-      <p class="welcome">← Select a section, or click your name above to read the bio.</p>
+
     </main>
 
   </div>
