@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greg Campbell — Author, Journalist, Director</title>
+  <meta name="description" content="Greg Campbell is an author, journalist, and documentary filmmaker based in Los Angeles. Four books, one award-winning feature documentary, and two decades of narrative nonfiction.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #162030;
+      color: #dde3eb;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Background ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(105deg, #162030 0%, #1e2e40 45%, #253547 100%);
+      z-index: 0;
+    }
+
+    /* ── Layout shell ── */
+    .shell {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 40px 48px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .site-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #e4ecf4;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: opacity 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .site-name:hover { opacity: 0.72; }
+
+    .tagline {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(180,200,220,0.45);
+    }
+
+    /* ── Body ── */
+    .body {
+      display: flex;
+      flex: 1;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-list {
+      flex: 1;
+      padding: 28px 0 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(200,218,234,0.68);
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover {
+      background: rgba(255,255,255,0.05);
+      color: #e4ecf4;
+    }
+
+    .nav-item.active,
+    .nav-item.open {
+      color: #e4ecf4;
+      font-weight: 500;
+    }
+
+    /* folder icon */
+    .folder-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .f-tab {
+      width: 7px;
+      height: 4px;
+      border-radius: 1.5px 1.5px 0 0;
+      position: absolute;
+      top: 0;
+      left: 1px;
+      background: #6b8aaa;
+    }
+
+    .f-body {
+      width: 16px;
+      height: 12px;
+      border-radius: 0 2px 2px 2px;
+      position: absolute;
+      bottom: 0;
+      background: #7a9dbd;
+    }
+
+    .nav-item.workshop .f-tab { background: #8a7aaa; }
+    .nav-item.workshop .f-body { background: #9d8dbd; }
+
+    /* chevron */
+    .chevron {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+      opacity: 0.35;
+      margin-left: auto;
+      transition: transform 0.22s ease, opacity 0.22s;
+      color: currentColor;
+    }
+
+    .nav-item.open .chevron {
+      transform: rotate(90deg);
+      opacity: 0.65;
+    }
+
+    /* subitems */
+    .subitems {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.28s ease;
+    }
+
+    .subitems.open {
+      max-height: 300px;
+    }
+
+    .sub-item {
+      padding: 7px 24px 7px 50px;
+      font-size: 12px;
+      cursor: pointer;
+      color: rgba(180,205,225,0.48);
+      transition: color 0.15s, background 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    .sub-item:hover {
+      color: rgba(220,235,248,0.9);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* ── Sidebar footer (contact icons) ── */
+    .sidebar-footer {
+      padding: 16px 24px 22px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .contact-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+      text-decoration: none;
+      color: #b8d0e8;
+    }
+
+    .contact-icon:hover { opacity: 0.88; }
+
+    .contact-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .contact-icon .icon-label {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(160,195,220,0.55);
+    }
+
+    .soon-badge {
+      font-size: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.07);
+      color: rgba(180,205,225,0.45);
+      padding: 2px 5px;
+      border-radius: 2px;
+    }
+
+    /* ── Content panel ── */
+    .content {
+      flex: 1;
+      padding: 38px 48px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .content-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #e4ecf4;
+      margin-bottom: 12px;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin-bottom: 24px;
+    }
+
+    /* welcome state */
+    .welcome {
+      margin-top: 48px;
+      font-size: 13px;
+      color: rgba(180,205,225,0.32);
+      line-height: 1.75;
+    }
+
+    /* ── About layout ── */
+    .about-layout {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .about-photo {
+      width: 130px;
+      height: 160px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: #1a2a3a;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: rgba(200,220,235,0.72);
+      line-height: 1.82;
+      max-width: 460px;
+    }
+
+    .about-text p + p { margin-top: 14px; }
+
+    /* ── Books ── */
+    .book-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: opacity 0.15s;
+      text-decoration: none;
+    }
+
+    .book-card:hover { opacity: 0.72; }
+
+    .book-thumb {
+      width: 38px;
+      height: 54px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      background: #243646;
+      color: #7aaac8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .book-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #d8e8f4;
+      margin-bottom: 5px;
+    }
+
+    .book-caption {
+      font-size: 12px;
+      color: rgba(180,205,225,0.48);
+      line-height: 1.58;
+    }
+
+    /* ── Journalism ── */
+    .outlet-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: default;
+    }
+
+    .outlet-name {
+      font-size: 14px;
+      font-weight: 400;
+      color: #cddcea;
+    }
+
+    .outlet-tag {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(130,165,195,0.42);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Workshop card ── */
+    .workshop-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 4px;
+      padding: 28px;
+      max-width: 440px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .workshop-card:hover {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .workshop-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(160,185,220,0.48);
+      margin-bottom: 10px;
+    }
+
+    .workshop-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #e4ecf4;
+      margin-bottom: 12px;
+    }
+
+    .workshop-desc {
+      font-size: 13px;
+      color: rgba(180,205,225,0.52);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .workshop-cta {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(160,195,225,0.6);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.15s;
+    }
+
+    .workshop-card:hover .arrow { transform: translateX(5px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header {
+        padding: 28px 24px 20px;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .site-name { font-size: 24px; }
+
+      .body { flex-direction: column; }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+
+      .content { padding: 28px 24px; }
+
+      .about-layout { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="shell">
+
+  <header>
+    <a class="site-name" id="nameLink" href="#" aria-label="About Greg Campbell">Greg Campbell</a>
+    <span class="tagline">Author · Journalist · Director</span>
+  </header>
+
+  <div class="body">
+
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="nav-list" id="navList">
+
+        <button class="nav-item" data-section="books" aria-expanded="false">
+          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
+          Books
+          <svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
+        </button>
+        <div class="subitems" id="sub-books" role="list">
+          <div class="sub-item" role="listitem" data-book="blood-diamonds">Blood Diamonds</div>
+          <div class="sub-item" role="listitem" data-book="flawless">Flawless</div>
+          <div class="sub-item" role="listitem" data-book="pot-inc">Pot Inc.</div>
+          <div class="sub-item" role="listitem" data-book="kosovo">Road to Kosovo</div>
+        </div>
+
+        <button class="nav-item" data-section="journalism" aria-expanded="false">
+          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
+          Journalism
+          <svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
+        </button>
+        <div class="subitems" id="sub-journalism" role="list">
+          <div class="sub-item" role="listitem">The New York Times</div>
+          <div class="sub-item" role="listitem">The Atlantic</div>
+          <div class="sub-item" role="listitem">The Economist</div>
+          <div class="sub-item" role="listitem">Foreign Policy</div>
+          <div class="sub-item" role="listitem">The Guardian</div>
+          <div class="sub-item" role="listitem">The New Republic</div>
+          <div class="sub-item" role="listitem">USA Today</div>
+          <div class="sub-item" role="listitem">San Francisco Chronicle</div>
+          <div class="sub-item" role="listitem">The Daily Beast</div>
+          <div class="sub-item" role="listitem">Salon</div>
+        </div>
+
+        <button class="nav-item" data-section="film" aria-expanded="false">
+          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
+          Film
+          <svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
+        </button>
+        <div class="subitems" id="sub-film" role="list">
+          <div class="sub-item" role="listitem">Hondros</div>
+          <div class="sub-item" role="listitem">Video Journalism</div>
+          <div class="sub-item" role="listitem">Branded Content</div>
+        </div>
+
+        <button class="nav-item workshop" data-section="workshop">
+          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
+          Workshop
+        </button>
+
+      </div>
+
+      <div class="sidebar-footer">
+        <a class="contact-icon" href="mailto:greg@gregcampbellcreative.com" title="Email Greg">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          <span class="icon-label">Email</span>
+        </a>
+        <div class="contact-icon" title="Instagram — coming soon" aria-label="Instagram (coming soon)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#b8d0e8" stroke="none"/></svg>
+          <span class="icon-label">Instagram</span>
+          <span class="soon-badge">Soon</span>
+        </div>
+        <div class="contact-icon" title="YouTube — coming soon" aria-label="YouTube (coming soon)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l6 3-6 3V9z" stroke-width="1.3"/></svg>
+          <span class="icon-label">YouTube</span>
+          <span class="soon-badge">Soon</span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="content" id="content" aria-live="polite">
+      <p class="welcome">← Select a section, or click your name above to read the bio.</p>
+    </main>
+
+  </div>
+</div>
+
+<script>
+  // ── Content definitions ──────────────────────────────────────────────
+  const sections = {
+
+    about: `
+      <h1 class="content-title">Greg Campbell</h1>
+      <div class="divider"></div>
+      <div class="about-layout">
+        <div class="about-photo">
+          <img src="photo.jpg" alt="Greg Campbell" />
+        </div>
+        <div class="about-text">
+          <p>Greg Campbell is an author, journalist, and documentary filmmaker based in Los Angeles. His work spans four continents and two decades of narrative nonfiction — from conflict zones to courtrooms, from Africa's diamond fields to the screen.</p>
+          <p>His book <em>Blood Diamonds</em> was adapted into the 2006 Warner Bros. feature film starring Leonardo DiCaprio. His documentary <em>Hondros</em> screened at festivals worldwide in 2017. He has reported for outlets including The New York Times, The Atlantic, The Economist, and The Guardian.</p>
+          <p>He lives in Los Angeles, where he writes, directs, and mentors the next generation of narrative nonfiction writers.</p>
+        </div>
+      </div>
+    `,
+
+    books: `
+      <h2 class="content-title">Books</h2>
+      <div class="divider"></div>
+      <a class="book-card" href="#" data-book="blood-diamonds">
+        <div class="book-thumb">BLOOD<br>DIAMONDS</div>
+        <div>
+          <div class="book-title">Blood Diamonds</div>
+          <div class="book-caption">Tracing conflict diamonds from Sierra Leone's brutal civil war to the world's jewelry counters. Adapted into the 2006 Warner Bros. feature film starring Leonardo DiCaprio.</div>
+        </div>
+      </a>
+      <a class="book-card" href="#" data-book="flawless">
+        <div class="book-thumb">FLAW-<br>LESS</div>
+        <div>
+          <div class="book-title">Flawless</div>
+          <div class="book-caption">Inside the largest diamond heist in history — $100 million stolen from Antwerp's diamond district in 2003. Adapted into a feature film.</div>
+        </div>
+      </a>
+      <a class="book-card" href="#" data-book="pot-inc">
+        <div class="book-thumb">POT<br>INC.</div>
+        <div>
+          <div class="book-title">Pot Inc.</div>
+          <div class="book-caption">An immersive investigation into the birth of America's legal marijuana industry, from underground growers to Wall Street.</div>
+        </div>
+      </a>
+      <a class="book-card" href="#" data-book="kosovo">
+        <div class="book-thumb">ROAD<br>TO K.</div>
+        <div>
+          <div class="book-title">Road to Kosovo</div>
+          <div class="book-caption">On-the-ground dispatches from the Balkans conflict — early narrative nonfiction from the post-Cold War front lines.</div>
+        </div>
+      </a>
+    `,
+
+    journalism: `
+      <h2 class="content-title">Journalism</h2>
+      <div class="divider"></div>
+      <div class="outlet-row"><span class="outlet-name">The New York Times</span><span class="outlet-tag">Investigation</span></div>
+      <div class="outlet-row"><span class="outlet-name">The Atlantic</span><span class="outlet-tag">Feature</span></div>
+      <div class="outlet-row"><span class="outlet-name">The Economist</span><span class="outlet-tag">Feature</span></div>
+      <div class="outlet-row"><span class="outlet-name">Foreign Policy</span><span class="outlet-tag">Feature</span></div>
+      <div class="outlet-row"><span class="outlet-name">The Guardian</span><span class="outlet-tag">Analysis</span></div>
+      <div class="outlet-row"><span class="outlet-name">The New Republic</span><span class="outlet-tag">Feature</span></div>
+      <div class="outlet-row"><span class="outlet-name">USA Today</span><span class="outlet-tag">Reporting</span></div>
+      <div class="outlet-row"><span class="outlet-name">San Francisco Chronicle</span><span class="outlet-tag">Reporting</span></div>
+      <div class="outlet-row"><span class="outlet-name">The Daily Beast</span><span class="outlet-tag">Feature</span></div>
+      <div class="outlet-row"><span class="outlet-name">Salon</span><span class="outlet-tag">Personal Essay</span></div>
+    `,
+
+    film: `
+      <h2 class="content-title">Film & Documentary</h2>
+      <div class="divider"></div>
+      <a class="book-card" href="#" data-film="hondros">
+        <div class="book-thumb">HON-<br>DROS</div>
+        <div>
+          <div class="book-title">Hondros</div>
+          <div class="book-caption">Award-winning feature documentary about Pulitzer Prize–nominated war photographer Chris Hondros. Directed and produced by Campbell. Festival circuit 2017.</div>
+        </div>
+      </a>
+      <div class="outlet-row"><span class="outlet-name">Award-Winning Video Journalism</span><span class="outlet-tag">Director</span></div>
+      <div class="outlet-row"><span class="outlet-name">Branded Documentary Content</span><span class="outlet-tag">Director / Producer</span></div>
+    `,
+
+    workshop: `
+      <h2 class="content-title">Workshop</h2>
+      <div class="divider"></div>
+      <a class="workshop-card" href="workshop/index.html">
+        <div class="workshop-eyebrow">Narrative Nonfiction</div>
+        <div class="workshop-title">The Art of the True Story</div>
+        <div class="workshop-desc">A mentorship-driven workshop for writers working at the intersection of journalism, memoir, and narrative craft. Built around the techniques behind longform investigations, book proposals, and documentary storytelling.</div>
+        <div class="workshop-cta">Visit the workshop <span class="arrow">→</span></div>
+      </a>
+    `
+  };
+
+  // ── Navigation logic ─────────────────────────────────────────────────
+  const content  = document.getElementById('content');
+  const navList  = document.getElementById('navList');
+  const nameLink = document.getElementById('nameLink');
+
+  function showSection(key) {
+    content.innerHTML = sections[key] || '';
+  }
+
+  function closeAll() {
+    document.querySelectorAll('.nav-item').forEach(n => {
+      n.classList.remove('active', 'open');
+      n.setAttribute('aria-expanded', 'false');
+    });
+    document.querySelectorAll('.subitems').forEach(s => s.classList.remove('open'));
+  }
+
+  nameLink.addEventListener('click', e => {
+    e.preventDefault();
+    closeAll();
+    showSection('about');
+  });
+
+  navList.addEventListener('click', e => {
+    const item = e.target.closest('.nav-item');
+    if (!item) return;
+
+    const sec = item.dataset.section;
+    const wasOpen = item.classList.contains('open');
+
+    closeAll();
+
+    if (!wasOpen) {
+      item.classList.add('active');
+      const sub = document.getElementById('sub-' + sec);
+      if (sub) {
+        sub.classList.add('open');
+        item.classList.add('open');
+        item.setAttribute('aria-expanded', 'true');
+      }
+      showSection(sec);
+    }
+  });
+</script>
+
+</body>
+</html>
