@@ -444,6 +444,123 @@
 
     .workshop-card:hover .arrow { transform: translateX(5px); }
 
+    /* ── Carousels ── */
+    .carousels {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      padding: 40px 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      flex: 1;
+    }
+
+    .carousel-row {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .carousel-row::before,
+    .carousel-row::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .carousel-row::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(15,10,30,0.6), transparent);
+    }
+
+    .carousel-row::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(15,10,30,0.6), transparent);
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      will-change: transform;
+    }
+
+    .carousel-track.ltr {
+      animation: scrollLTR 40s linear infinite;
+    }
+
+    .carousel-track.rtl {
+      animation: scrollRTL 35s linear infinite;
+    }
+
+    .carousel-track.ltr2 {
+      animation: scrollLTR 45s linear infinite;
+    }
+
+    @keyframes scrollLTR {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRTL {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+
+    .carousel-track img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.82;
+      filter: brightness(1.1) saturate(0.9);
+      transition: opacity 0.2s;
+      flex-shrink: 0;
+    }
+
+    .carousel-track img:hover { opacity: 1; }
+
+    .carousel-row.books .carousel-track img {
+      height: 80px;
+      border-radius: 2px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .carousel-row.films .carousel-track img {
+      height: 90px;
+      border-radius: 2px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .carousel-row.journalism .carousel-track img {
+      height: 36px;
+      filter: brightness(1.3) saturate(0) invert(1);
+      opacity: 0.65;
+    }
+
+    .carousel-row.journalism .carousel-track img:hover { opacity: 0.9; }
+
+    .carousel-label {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(180,205,225,0.35);
+      margin-bottom: 10px;
+      padding-left: 4px;
+    }
+
+    .carousel-group {
+      display: flex;
+      flex-direction: column;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 640px) {
       header {
@@ -552,6 +669,74 @@
 
     <main class="content" id="content" aria-live="polite">
 
+      <div id="homeCarousels" class="carousels">
+
+        <div class="carousel-group">
+          <div class="carousel-label">Film</div>
+          <div class="carousel-row films">
+            <div class="carousel-track ltr" id="filmTrack">
+              <img src="images/films/hondros_poster.jpeg"     alt="Hondros">
+              <img src="images/films/chain_of_command.jpg"    alt="Chain of Command">
+              <img src="images/films/isis_placeholder.png"    alt="ISIS">
+              <img src="images/films/stolen_placeholder.png"  alt="Stolen">
+              <img src="images/films/hondros_poster.jpeg"     alt="Hondros">
+              <img src="images/films/chain_of_command.jpg"    alt="Chain of Command">
+              <img src="images/films/isis_placeholder.png"    alt="ISIS">
+              <img src="images/films/stolen_placeholder.png"  alt="Stolen">
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-group">
+          <div class="carousel-label">Books</div>
+          <div class="carousel-row books">
+            <div class="carousel-track rtl" id="bookTrack">
+              <img src="images/books/blood_diamonds.png"  alt="Blood Diamonds">
+              <img src="images/books/flawless.png"        alt="Flawless">
+              <img src="images/books/pot_inc.png"         alt="Pot Inc.">
+              <img src="images/books/road_to_kosovo.png"  alt="Road to Kosovo">
+              <img src="images/books/blood_diamonds.png"  alt="Blood Diamonds">
+              <img src="images/books/flawless.png"        alt="Flawless">
+              <img src="images/books/pot_inc.png"         alt="Pot Inc.">
+              <img src="images/books/road_to_kosovo.png"  alt="Road to Kosovo">
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-group">
+          <div class="carousel-label">Journalism</div>
+          <div class="carousel-row journalism">
+            <div class="carousel-track ltr2" id="journalismTrack">
+              <img src="images/journalism/nyt_logo.png"                     alt="The New York Times">
+              <img src="images/journalism/atlantic_logo.png"                alt="The Atlantic">
+              <img src="images/journalism/economist_logo.png"               alt="The Economist">
+              <img src="images/journalism/foreign_policy_logo.png"          alt="Foreign Policy">
+              <img src="images/journalism/guardian_logo.png"                alt="The Guardian">
+              <img src="images/journalism/new_republic_logo.png"            alt="The New Republic">
+              <img src="images/journalism/aljazeera_logo.png"               alt="Al Jazeera">
+              <img src="images/journalism/paris_match_logo.png"             alt="Paris Match">
+              <img src="images/journalism/daily_beast_logo.png"             alt="The Daily Beast">
+              <img src="images/journalism/christian_science_monitor_logo.png" alt="Christian Science Monitor">
+              <img src="images/journalism/usa_today_logo.png"               alt="USA Today">
+              <img src="images/journalism/salon_logo.png"                   alt="Salon">
+              <img src="images/journalism/nyt_logo.png"                     alt="The New York Times">
+              <img src="images/journalism/atlantic_logo.png"                alt="The Atlantic">
+              <img src="images/journalism/economist_logo.png"               alt="The Economist">
+              <img src="images/journalism/foreign_policy_logo.png"          alt="Foreign Policy">
+              <img src="images/journalism/guardian_logo.png"                alt="The Guardian">
+              <img src="images/journalism/new_republic_logo.png"            alt="The New Republic">
+              <img src="images/journalism/aljazeera_logo.png"               alt="Al Jazeera">
+              <img src="images/journalism/paris_match_logo.png"             alt="Paris Match">
+              <img src="images/journalism/daily_beast_logo.png"             alt="The Daily Beast">
+              <img src="images/journalism/christian_science_monitor_logo.png" alt="Christian Science Monitor">
+              <img src="images/journalism/usa_today_logo.png"               alt="USA Today">
+              <img src="images/journalism/salon_logo.png"                   alt="Salon">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </main>
 
   </div>
@@ -651,12 +836,22 @@
   };
 
   // ── Navigation logic ─────────────────────────────────────────────────
-  const content  = document.getElementById('content');
-  const navList  = document.getElementById('navList');
-  const nameLink = document.getElementById('nameLink');
+  const content   = document.getElementById('content');
+  const navList   = document.getElementById('navList');
+  const nameLink  = document.getElementById('nameLink');
+  const carousels = document.getElementById('homeCarousels');
 
   function showSection(key) {
+    carousels.style.display = 'none';
     content.innerHTML = sections[key] || '';
+    content.appendChild(carousels); // keep in DOM so images stay cached
+    carousels.style.display = 'none';
+  }
+
+  function showHome() {
+    content.innerHTML = '';
+    content.appendChild(carousels);
+    carousels.style.display = 'flex';
   }
 
   function closeAll() {
@@ -691,6 +886,8 @@
         item.setAttribute('aria-expanded', 'true');
       }
       showSection(sec);
+    } else {
+      showHome();
     }
   });
 </script>
