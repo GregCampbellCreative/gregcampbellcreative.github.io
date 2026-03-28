@@ -84,7 +84,9 @@
       padding: 8px 0;
     }
 
-    .gc-nav-item:hover .gc-dropdown { display: block; }
+    .gc-dropdown.open { display: block; }
+
+    .gc-tag.active { border-bottom-color: #1a1a1a; }
 
     .gc-dropdown a {
       display: block;
@@ -340,5 +342,31 @@
     <p class="gc-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
   </footer>
 
+  <script>
+    document.querySelectorAll('.gc-nav-item').forEach(function(item) {
+      var trigger = item.querySelector('.gc-tag');
+      var dropdown = item.querySelector('.gc-dropdown');
+      if (!trigger || !dropdown) return;
+
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = dropdown.classList.contains('open');
+        // Close all dropdowns first
+        document.querySelectorAll('.gc-dropdown').forEach(function(d) { d.classList.remove('open'); });
+        document.querySelectorAll('.gc-tag').forEach(function(t) { t.classList.remove('active'); });
+        // Toggle this one
+        if (!isOpen) {
+          dropdown.classList.add('open');
+          trigger.classList.add('active');
+        }
+      });
+    });
+
+    // Click anywhere outside to close
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.gc-dropdown').forEach(function(d) { d.classList.remove('open'); });
+      document.querySelectorAll('.gc-tag').forEach(function(t) { t.classList.remove('active'); });
+    });
+  </script>
 </body>
 </html>
