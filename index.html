@@ -24,6 +24,11 @@
       border-bottom: 1px solid #ccc9c2;
     }
 
+    .gc-name-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
     .gc-name {
       font-family: 'DM Sans', sans-serif;
       font-size: 42px;
@@ -32,14 +37,21 @@
       text-transform: uppercase;
       margin: 0 0 14px;
       color: #1a1a1a;
+      transition: opacity 0.2s;
     }
+    .gc-name-link:hover .gc-name { opacity: 0.6; }
 
     .gc-taglines {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 0;
       align-items: center;
       flex-wrap: wrap;
+    }
+
+    /* ── DROPDOWN NAV ── */
+    .gc-nav-item {
+      position: relative;
     }
 
     .gc-tag {
@@ -51,10 +63,48 @@
       border-bottom: 1px solid transparent;
       padding-bottom: 1px;
       transition: border-color 0.2s;
+      cursor: pointer;
+      display: inline-block;
+      padding: 6px 0;
     }
     .gc-tag:hover { border-bottom-color: #1a1a1a; }
 
-    .gc-sep { font-size: 13px; color: #999; font-weight: 300; }
+    .gc-sep { font-size: 13px; color: #999; font-weight: 300; padding: 0 10px; }
+
+    .gc-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f5f2ee;
+      border: 1px solid #ccc9c2;
+      min-width: 200px;
+      z-index: 100;
+      padding: 8px 0;
+    }
+
+    .gc-nav-item:hover .gc-dropdown { display: block; }
+
+    .gc-dropdown a {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      color: #1a1a1a;
+      text-decoration: none;
+      padding: 8px 20px;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .gc-dropdown a:hover { background: #ede9e3; }
+
+    .gc-dropdown .gc-dropdown-divider {
+      height: 1px;
+      background: #ccc9c2;
+      margin: 6px 0;
+    }
 
     /* ── GRID ── */
     .gc-grid-wrap {
@@ -157,9 +207,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .gc-name { font-size: 28px; }
-      .gc-row {
-        grid-template-columns: 1fr;
-      }
+      .gc-row { grid-template-columns: 1fr; }
       .gc-gap { display: none; }
       .gc-img-wrap { width: 60%; }
       .gc-quote-wrap.left,
@@ -168,21 +216,65 @@
         padding: 24px 0;
       }
       .gc-footer { padding: 32px 28px 40px; }
+      .gc-dropdown { left: 0; transform: none; }
     }
   </style>
 </head>
 <body>
 
   <header class="gc-header">
-    <h1 class="gc-name">Greg Campbell</h1>
+    <a href="bio.html" class="gc-name-link"><h1 class="gc-name">Greg Campbell</h1></a>
     <nav class="gc-taglines">
-      <a href="#journalism" class="gc-tag">Journalist</a>
+
+      <!-- Journalist -->
+      <div class="gc-nav-item">
+        <span class="gc-tag">Journalist</span>
+        <div class="gc-dropdown">
+          <a href="#" target="_blank">The New York Times</a>
+          <a href="#" target="_blank">The Atlantic</a>
+          <a href="#" target="_blank">The Guardian</a>
+          <a href="#" target="_blank">The Economist</a>
+          <a href="#" target="_blank">Foreign Policy</a>
+          <a href="#" target="_blank">USA Today</a>
+          <a href="#" target="_blank">San Francisco Chronicle</a>
+          <a href="#" target="_blank">The Daily Beast</a>
+          <a href="#" target="_blank">Salon</a>
+        </div>
+      </div>
+
       <span class="gc-sep">&nbsp;·&nbsp;</span>
-      <a href="#books" class="gc-tag">Author</a>
+
+      <!-- Author -->
+      <div class="gc-nav-item">
+        <span class="gc-tag">Author</span>
+        <div class="gc-dropdown">
+          <a href="books/blood-diamonds.html">Blood Diamonds</a>
+          <a href="books/flawless.html">Flawless</a>
+          <a href="books/road-to-kosovo.html">Road to Kosovo</a>
+          <a href="books/pot-inc.html">Pot Inc.</a>
+        </div>
+      </div>
+
       <span class="gc-sep">&nbsp;·&nbsp;</span>
-      <a href="#films" class="gc-tag">Filmmaker</a>
+
+      <!-- Filmmaker -->
+      <div class="gc-nav-item">
+        <span class="gc-tag">Filmmaker</span>
+        <div class="gc-dropdown">
+          <a href="films/hondros.html">Hondros</a>
+          <a href="https://www.nationalgeographic.com/tv/show/3aede8b0-32d7-4ee1-a116-299d79cdfa03/season/1" target="_blank">Chain of Command</a>
+          <a href="https://www.nytimes.com/video/world/middleeast/100000003077656/surviving-isis-massacre-iraq.html" target="_blank">Surviving an ISIS Massacre</a>
+          <a href="films/branded-content.html">Branded Content</a>
+        </div>
+      </div>
+
       <span class="gc-sep">&nbsp;·&nbsp;</span>
-      <a href="#workshop" class="gc-tag">Workshop</a>
+
+      <!-- Workshop -->
+      <div class="gc-nav-item">
+        <a href="workshop.html" class="gc-tag">Workshop</a>
+      </div>
+
     </nav>
   </header>
 
