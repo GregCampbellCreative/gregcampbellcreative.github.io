@@ -3,909 +3,248 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Greg Campbell — Author, Journalist, Director</title>
-  <meta name="description" content="Greg Campbell is an author, journalist, and documentary filmmaker based in Los Angeles. Four books, one award-winning feature documentary, and two decades of narrative nonfiction.">
+  <title>Greg Campbell</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
+      background: #f5f2ee;
+      color: #1a1a1a;
       font-family: 'DM Sans', sans-serif;
-      background: #1a1a3a;
-      color: #dde3eb;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-weight: 300;
     }
 
-    /* ── Background ── */
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background-color: #1a1a3a;
-      background-image:
-        radial-gradient(ellipse 55% 80% at 5%  100%, rgba(120,30,160,0.95)  0%, rgba(100,20,140,0.6) 35%, transparent 65%),
-        radial-gradient(ellipse 45% 60% at 35% 90%,  rgba(180,50,120,0.90)  0%, rgba(160,40,100,0.5) 40%, transparent 65%),
-        radial-gradient(ellipse 50% 55% at 70% 75%,  rgba(210,80,80,0.75)   0%, rgba(190,60,60,0.4)  40%, transparent 62%),
-        radial-gradient(ellipse 60% 50% at 95% 55%,  rgba(100,60,200,0.80)  0%, rgba(80,50,180,0.45) 40%, transparent 65%),
-        radial-gradient(ellipse 70% 45% at 60% 10%,  rgba(40,80,200,0.85)   0%, rgba(30,60,180,0.5)  40%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 15% 20%,  rgba(60,30,130,0.90)   0%, rgba(50,20,110,0.5)  40%, transparent 62%),
-        linear-gradient(170deg, #0e0e28 0%, #1a1040 50%, #0a0a20 100%);
+    /* ── HEADER ── */
+    .gc-header {
+      text-align: center;
+      padding: 52px 40px 36px;
+      border-bottom: 1px solid #ccc9c2;
     }
 
-    /* ── Layout shell ── */
-    .shell {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* ── Header ── */
-    header {
-      padding: 40px 48px 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      flex-shrink: 0;
-    }
-
-    .site-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: #e4ecf4;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-      transition: opacity 0.15s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .site-name:hover { opacity: 0.72; }
-
-    .tagline {
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
+    .gc-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 42px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(200,220,240,0.75);
+      margin: 0 0 14px;
+      color: #1a1a1a;
     }
 
-    /* ── Body ── */
-    .body {
+    .gc-taglines {
       display: flex;
-      flex: 1;
-    }
-
-    /* ── Sidebar ── */
-    .sidebar {
-      width: 220px;
-      flex-shrink: 0;
-      border-right: 1px solid rgba(255,255,255,0.07);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .nav-list {
-      flex: 1;
-      padding: 28px 0 0;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 10px;
-      padding: 10px 24px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      color: rgba(210,228,244,0.82);
-      transition: background 0.15s, color 0.15s;
-      user-select: none;
-      border: none;
-      background: none;
-      width: 100%;
-      text-align: left;
-    }
-
-    .nav-item:hover {
-      background: rgba(255,255,255,0.05);
-      color: #e4ecf4;
-    }
-
-    .nav-item.active,
-    .nav-item.open {
-      color: #e4ecf4;
-      font-weight: 500;
-    }
-
-    /* folder icon */
-    .folder-icon {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      position: relative;
-    }
-
-    .f-tab {
-      width: 7px;
-      height: 4px;
-      border-radius: 1.5px 1.5px 0 0;
-      position: absolute;
-      top: 0;
-      left: 1px;
-      background: #6b8aaa;
-    }
-
-    .f-body {
-      width: 16px;
-      height: 12px;
-      border-radius: 0 2px 2px 2px;
-      position: absolute;
-      bottom: 0;
-      background: #7a9dbd;
-    }
-
-    .nav-item.workshop .f-tab { background: #8a7aaa; }
-    .nav-item.workshop .f-body { background: #9d8dbd; }
-
-    /* chevron */
-    .chevron {
-      width: 11px;
-      height: 11px;
-      flex-shrink: 0;
-      opacity: 0.35;
-      margin-left: auto;
-      transition: transform 0.22s ease, opacity 0.22s;
-      color: currentColor;
-    }
-
-    .nav-item.open .chevron {
-      transform: rotate(90deg);
-      opacity: 0.65;
-    }
-
-    /* subitems */
-    .subitems {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.28s ease;
-    }
-
-    .subitems.open {
-      max-height: 300px;
-    }
-
-    .sub-item {
-      padding: 7px 24px 7px 50px;
-      font-size: 12px;
-      cursor: pointer;
-      color: rgba(180,205,225,0.48);
-      transition: color 0.15s, background 0.15s;
-      letter-spacing: 0.02em;
-    }
-
-    .sub-item:hover {
-      color: rgba(220,235,248,0.9);
-      background: rgba(255,255,255,0.03);
-    }
-
-    /* ── Sidebar footer (contact icons) ── */
-    .sidebar-footer {
-      padding: 16px 24px 22px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-    }
-
-    .contact-icon {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      opacity: 0.72;
-      transition: opacity 0.2s;
+      flex-wrap: wrap;
+    }
+
+    .gc-tag {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #1a1a1a;
       text-decoration: none;
-      color: #c8dff0;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
     }
+    .gc-tag:hover { border-bottom-color: #1a1a1a; }
 
-    .contact-icon:hover { opacity: 1; }
+    .gc-sep { font-size: 13px; color: #999; font-weight: 300; }
 
-    .contact-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.5;
-    }
-
-    .contact-icon .icon-label {
-      font-size: 9px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(190,215,235,0.8);
-    }
-
-    .soon-badge {
-      font-size: 8px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,0.07);
-      color: rgba(180,205,225,0.45);
-      padding: 2px 5px;
-      border-radius: 2px;
-    }
-
-    /* ── Content panel ── */
-    .content {
-      flex: 1;
-      padding: 38px 48px;
+    /* ── GRID ── */
+    .gc-grid-wrap {
+      padding: 24px 5% 24px;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      gap: 24px;
     }
 
-    .content-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 400;
-      color: #e4ecf4;
-      margin-bottom: 12px;
+    .gc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 24px 1fr 1fr;
     }
 
-    .divider {
-      height: 1px;
-      background: rgba(255,255,255,0.08);
-      margin-bottom: 24px;
-    }
-
-    /* welcome state */
-    .welcome {
-      margin-top: 48px;
-      font-size: 13px;
-      color: rgba(180,205,225,0.32);
-      line-height: 1.75;
-    }
-
-    /* ── About layout ── */
-    .about-layout {
+    .gc-img-col {
       display: flex;
-      gap: 32px;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
-    .about-photo {
-      width: 130px;
-      height: 160px;
-      border-radius: 3px;
-      flex-shrink: 0;
+    .gc-img-wrap {
+      width: 75%;
+      margin: 0 auto;
       overflow: hidden;
-      background: #1a2a3a;
+      aspect-ratio: 3/4;
+      background: #d8d4cc;
     }
 
-    .about-photo img {
+    .gc-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
-    }
-
-    .about-text {
-      font-size: 14px;
-      color: rgba(200,220,235,0.72);
-      line-height: 1.82;
-      max-width: 460px;
-    }
-
-    .about-text p + p { margin-top: 14px; }
-
-    /* ── Books ── */
-    .book-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      cursor: pointer;
-      transition: opacity 0.15s;
-      text-decoration: none;
-    }
-
-    .book-card:hover { opacity: 0.72; }
-
-    .book-thumb {
-      width: 38px;
-      height: 54px;
-      border-radius: 2px;
-      flex-shrink: 0;
-      background: #243646;
-      color: #7aaac8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-align: center;
-      line-height: 1.4;
-    }
-
-    .book-title {
-      font-size: 14px;
-      font-weight: 500;
-      color: #d8e8f4;
-      margin-bottom: 5px;
-    }
-
-    .book-caption {
-      font-size: 12px;
-      color: rgba(180,205,225,0.48);
-      line-height: 1.58;
-    }
-
-    /* ── Journalism ── */
-    .outlet-row {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      cursor: default;
-    }
-
-    .outlet-name {
-      font-size: 14px;
-      font-weight: 400;
-      color: #cddcea;
-    }
-
-    .outlet-tag {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(130,165,195,0.42);
-      margin-left: auto;
-      flex-shrink: 0;
-    }
-
-    /* ── Workshop card ── */
-    .workshop-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 4px;
-      padding: 28px;
-      max-width: 440px;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
       display: block;
+      transition: transform 0.4s ease;
+    }
+    .gc-img-wrap:hover img { transform: scale(1.03); }
+
+    .gc-gap { background: #f5f2ee; }
+
+    .gc-quote-wrap {
+      padding: 32px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .workshop-card:hover {
-      background: rgba(255,255,255,0.07);
+    .gc-quote-wrap.left {
+      text-align: right;
+      padding-left: 0;
     }
 
-    .workshop-eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.15em;
+    .gc-quote-wrap.right {
+      text-align: left;
+      padding-right: 0;
+    }
+
+    .gc-book-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(160,185,220,0.48);
-      margin-bottom: 10px;
+      color: #888;
+      margin: 0 0 14px;
     }
 
-    .workshop-title {
+    .gc-quote {
       font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: #e4ecf4;
-      margin-bottom: 12px;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #2a2a2a;
+      margin: 0 0 16px;
     }
 
-    .workshop-desc {
-      font-size: 13px;
-      color: rgba(180,205,225,0.52);
-      line-height: 1.75;
-      margin-bottom: 20px;
-    }
-
-    .workshop-cta {
+    .gc-attribution {
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(160,195,225,0.6);
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      color: #aaa;
     }
 
-    .arrow {
-      display: inline-block;
-      transition: transform 0.15s;
+    /* ── FOOTER ── */
+    .gc-footer {
+      padding: 36px 80px 48px;
+      text-align: center;
+      border-top: 1px solid #ccc9c2;
+      margin-top: 8px;
     }
 
-    .workshop-card:hover .arrow { transform: translateX(5px); }
-
-    /* ── Carousels ── */
-    .carousels {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 32px;
-      padding: 40px 0;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      flex: 1;
+    .gc-bio {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #666;
+      max-width: 560px;
+      margin: 0 auto;
     }
 
-    .carousel-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .carousel-label {
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(180,205,225,0.35);
-      margin-bottom: 10px;
-      padding-left: 4px;
-    }
-
-    .carousel-row {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-    }
-
-    .carousel-row::before,
-    .carousel-row::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 80px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .carousel-row::before {
-      left: 0;
-      background: linear-gradient(to right, rgba(12,8,25,0.7), transparent);
-    }
-    .carousel-row::after {
-      right: 0;
-      background: linear-gradient(to left, rgba(12,8,25,0.7), transparent);
-    }
-
-    .carousel-track {
-      display: flex;
-      align-items: center;
-      gap: 48px;
-      white-space: nowrap;
-      width: max-content;
-    }
-
-    .carousel-track img {
-      object-fit: contain;
-      flex-shrink: 0;
-      display: block;
-    }
-
-    .carousel-row.films .carousel-track img {
-      height: 88px;
-      border-radius: 3px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      opacity: 0.88;
-    }
-
-    .carousel-row.books .carousel-track img {
-      height: 78px;
-      border-radius: 3px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      opacity: 0.88;
-    }
-
-    .carousel-row.journalism .carousel-track img {
-      height: 32px;
-      opacity: 0.75;
-      filter: brightness(10) saturate(0);
-    }
-
-    .carousel-row.films .carousel-track img:hover,
-    .carousel-row.books .carousel-track img:hover { opacity: 1; }
-    .carousel-row.journalism .carousel-track img:hover { opacity: 1; filter: brightness(10) saturate(0); }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      header {
-        padding: 28px 24px 20px;
-        flex-direction: column;
-        gap: 6px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .gc-name { font-size: 28px; }
+      .gc-row {
+        grid-template-columns: 1fr;
       }
-
-      .site-name { font-size: 24px; }
-
-      .body { flex-direction: column; }
-
-      .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.07);
+      .gc-gap { display: none; }
+      .gc-img-wrap { width: 60%; }
+      .gc-quote-wrap.left,
+      .gc-quote-wrap.right {
+        text-align: left;
+        padding: 24px 0;
       }
-
-      .content { padding: 28px 24px; }
-
-      .about-layout { flex-direction: column; }
+      .gc-footer { padding: 32px 28px 40px; }
     }
   </style>
 </head>
 <body>
 
-<div class="bg"></div>
-
-<div class="shell">
-
-  <header>
-    <a class="site-name" id="nameLink" href="#" aria-label="About Greg Campbell">Greg Campbell</a>
-    <span class="tagline">Author · Journalist · Director</span>
+  <header class="gc-header">
+    <h1 class="gc-name">Greg Campbell</h1>
+    <nav class="gc-taglines">
+      <a href="#journalism" class="gc-tag">Journalist</a>
+      <span class="gc-sep">&nbsp;·&nbsp;</span>
+      <a href="#books" class="gc-tag">Author</a>
+      <span class="gc-sep">&nbsp;·&nbsp;</span>
+      <a href="#films" class="gc-tag">Filmmaker</a>
+      <span class="gc-sep">&nbsp;·&nbsp;</span>
+      <a href="#workshop" class="gc-tag">Workshop</a>
+    </nav>
   </header>
 
-  <div class="body">
+  <main>
+    <div class="gc-grid-wrap">
 
-    <nav class="sidebar" aria-label="Main navigation">
-      <div class="nav-list" id="navList">
-
-        <button class="nav-item" data-section="books" aria-expanded="false">
-          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
-          Books
-          <svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
-        </button>
-        <div class="subitems" id="sub-books" role="list">
-          <div class="sub-item" role="listitem" data-book="blood-diamonds">Blood Diamonds</div>
-          <div class="sub-item" role="listitem" data-book="flawless">Flawless</div>
-          <div class="sub-item" role="listitem" data-book="pot-inc">Pot Inc.</div>
-          <div class="sub-item" role="listitem" data-book="kosovo">Road to Kosovo</div>
+      <!-- Row 1: Blood Diamonds | Hondros -->
+      <div class="gc-row">
+        <div class="gc-quote-wrap left">
+          <p class="gc-book-title">Blood Diamonds</p>
+          <p class="gc-quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."</p>
+          <p class="gc-attribution">— Publication Name</p>
         </div>
-
-        <button class="nav-item" data-section="journalism" aria-expanded="false">
-          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
-          Journalism
-          <svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
-        </button>
-        <div class="subitems" id="sub-journalism" role="list">
-          <div class="sub-item" role="listitem">The New York Times</div>
-          <div class="sub-item" role="listitem">The Atlantic</div>
-          <div class="sub-item" role="listitem">The Economist</div>
-          <div class="sub-item" role="listitem">Foreign Policy</div>
-          <div class="sub-item" role="listitem">The Guardian</div>
-          <div class="sub-item" role="listitem">The New Republic</div>
-          <div class="sub-item" role="listitem">USA Today</div>
-          <div class="sub-item" role="listitem">San Francisco Chronicle</div>
-          <div class="sub-item" role="listitem">The Daily Beast</div>
-          <div class="sub-item" role="listitem">Salon</div>
-        </div>
-
-        <button class="nav-item" data-section="film" aria-expanded="false">
-          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
-          Film
-          <svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
-        </button>
-        <div class="subitems" id="sub-film" role="list">
-          <div class="sub-item" role="listitem">Hondros</div>
-          <div class="sub-item" role="listitem">Video Journalism</div>
-          <div class="sub-item" role="listitem">Branded Content</div>
-        </div>
-
-        <button class="nav-item workshop" data-section="workshop">
-          <span class="folder-icon" aria-hidden="true"><span class="f-tab"></span><span class="f-body"></span></span>
-          Workshop
-        </button>
-
-      </div>
-
-      <div class="sidebar-footer">
-        <a class="contact-icon" href="mailto:greg@gregcampbellcreative.com" title="Email Greg">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-          <span class="icon-label">Email</span>
-        </a>
-        <div class="contact-icon" title="Instagram — coming soon" aria-label="Instagram (coming soon)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#b8d0e8" stroke="none"/></svg>
-          <span class="icon-label">Instagram</span>
-          <span class="soon-badge">Soon</span>
-        </div>
-        <div class="contact-icon" title="YouTube — coming soon" aria-label="YouTube (coming soon)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l6 3-6 3V9z" stroke-width="1.3"/></svg>
-          <span class="icon-label">YouTube</span>
-          <span class="soon-badge">Soon</span>
-        </div>
-      </div>
-    </nav>
-
-    <main class="content" id="content" aria-live="polite">
-
-      <div id="homeCarousels" class="carousels">
-
-        <div class="carousel-group">
-          <div class="carousel-label">Film</div>
-          <div class="carousel-row films">
-            <div class="carousel-track" id="filmTrack">
-              <img src="images/films/hondros_poster.jpeg"    alt="Hondros">
-              <img src="images/films/chain_of_command.jpg"   alt="Chain of Command">
-              <img src="images/films/isis_placeholder.png"   alt="ISIS">
-              <img src="images/films/stolen_placeholder.png" alt="Stolen">
-            </div>
+        <div class="gc-img-col">
+          <div class="gc-img-wrap">
+            <img src="images/books/blood_diamonds.png" alt="Blood Diamonds">
           </div>
         </div>
-
-        <div class="carousel-group">
-          <div class="carousel-label">Books</div>
-          <div class="carousel-row books">
-            <div class="carousel-track" id="bookTrack">
-              <img src="images/books/blood_diamonds.png" alt="Blood Diamonds">
-              <img src="images/books/flawless.png"       alt="Flawless">
-              <img src="images/books/pot_inc.png"        alt="Pot Inc.">
-              <img src="images/books/road_to_kosovo.png" alt="Road to Kosovo">
-            </div>
+        <div class="gc-gap"></div>
+        <div class="gc-img-col">
+          <div class="gc-img-wrap">
+            <img src="images/films/hondros_poster.jpeg" alt="Hondros">
           </div>
         </div>
+        <div class="gc-quote-wrap right">
+          <p class="gc-book-title">Hondros</p>
+          <p class="gc-quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."</p>
+          <p class="gc-attribution">— Publication Name</p>
+        </div>
+      </div>
 
-        <div class="carousel-group">
-          <div class="carousel-label">Journalism</div>
-          <div class="carousel-row journalism">
-            <div class="carousel-track" id="journalismTrack">
-              <img src="images/journalism/nyt_logo.png"                       alt="The New York Times">
-              <img src="images/journalism/atlantic_logo.png"                  alt="The Atlantic">
-              <img src="images/journalism/economist_logo.png"                 alt="The Economist">
-              <img src="images/journalism/foreign_policy_logo.png"            alt="Foreign Policy">
-              <img src="images/journalism/guardian_logo.png"                  alt="The Guardian">
-              <img src="images/journalism/new_republic_logo.png"              alt="The New Republic">
-              <img src="images/journalism/aljazeera_logo.png"                 alt="Al Jazeera">
-              <img src="images/journalism/paris_match_logo.png"               alt="Paris Match">
-              <img src="images/journalism/daily_beast_logo.png"               alt="The Daily Beast">
-              <img src="images/journalism/christian_science_monitor_logo.png" alt="Christian Science Monitor">
-              <img src="images/journalism/usa_today_logo.png"                 alt="USA Today">
-              <img src="images/journalism/salon_logo.png"                     alt="Salon">
-            </div>
+      <!-- Row 2: Flawless | Road to Kosovo -->
+      <div class="gc-row">
+        <div class="gc-quote-wrap left">
+          <p class="gc-book-title">Flawless</p>
+          <p class="gc-quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."</p>
+          <p class="gc-attribution">— Publication Name</p>
+        </div>
+        <div class="gc-img-col">
+          <div class="gc-img-wrap">
+            <img src="images/books/flawless.png" alt="Flawless">
           </div>
         </div>
-
-      </div>
-
-    </main>
-
-  </div>
-</div>
-
-<script>
-  // ── Infinite marquee engine ───────────────────────────────────────────
-  // Waits for images to load, clones content until it overflows the row,
-  // then animates with requestAnimationFrame for buttery smoothness.
-
-  const MARQUEES = [
-    { id: 'filmTrack',       speed: 0.4,  dir: 1  },
-    { id: 'bookTrack',       speed: 0.35, dir: -1 },
-    { id: 'journalismTrack', speed: 0.5,  dir: 1  },
-  ];
-
-  function setupMarquee(trackEl, speed, dir) {
-    const row = trackEl.parentElement;
-    const rowW = row.offsetWidth;
-
-    // Clone until content width exceeds 2x row width for seamless loop
-    const originalItems = Array.from(trackEl.children);
-    const originalW = trackEl.scrollWidth;
-    const copiesNeeded = Math.ceil((rowW * 2.5) / originalW) + 1;
-
-    for (let i = 0; i < copiesNeeded; i++) {
-      originalItems.forEach(img => {
-        trackEl.appendChild(img.cloneNode(true));
-      });
-    }
-
-    const loopWidth = originalW + (48); // one set width + one gap
-    let pos = dir === -1 ? -loopWidth : 0;
-
-    function tick() {
-      pos -= speed * dir;
-      if (dir === 1 && pos <= -loopWidth) pos += loopWidth;
-      if (dir === -1 && pos >= 0) pos -= loopWidth;
-      trackEl.style.transform = `translateX(${pos}px)`;
-      requestAnimationFrame(tick);
-    }
-
-    requestAnimationFrame(tick);
-  }
-
-  function initMarquees() {
-    MARQUEES.forEach(({ id, speed, dir }) => {
-      const track = document.getElementById(id);
-      if (!track) return;
-      setupMarquee(track, speed, dir);
-    });
-  }
-
-  // Wait for all carousel images to load before measuring widths
-  const carouselImgs = document.querySelectorAll('.carousel-track img');
-  let loaded = 0;
-  const total = carouselImgs.length;
-
-  if (total === 0) {
-    initMarquees();
-  } else {
-    carouselImgs.forEach(img => {
-      if (img.complete) {
-        loaded++;
-        if (loaded === total) initMarquees();
-      } else {
-        img.addEventListener('load',  () => { loaded++; if (loaded === total) initMarquees(); });
-        img.addEventListener('error', () => { loaded++; if (loaded === total) initMarquees(); });
-      }
-    });
-  }
-
-  // ── Content definitions ──────────────────────────────────────────────
-  const sections = {
-
-    about: `
-      <h1 class="content-title">Greg Campbell</h1>
-      <div class="divider"></div>
-      <div class="about-layout">
-        <div class="about-photo">
-          <img src="photo.jpg" alt="Greg Campbell" />
+        <div class="gc-gap"></div>
+        <div class="gc-img-col">
+          <div class="gc-img-wrap">
+            <img src="images/books/road_to_kosovo.png" alt="Road to Kosovo">
+          </div>
         </div>
-        <div class="about-text">
-          <p>Greg Campbell is an author, journalist, and documentary filmmaker based in Los Angeles. His work spans four continents and two decades of narrative nonfiction — from conflict zones to courtrooms, from Africa's diamond fields to the screen.</p>
-          <p>His book <em>Blood Diamonds</em> was adapted into the 2006 Warner Bros. feature film starring Leonardo DiCaprio. His documentary <em>Hondros</em> screened at festivals worldwide in 2017. He has reported for outlets including The New York Times, The Atlantic, The Economist, and The Guardian.</p>
-          <p>He lives in Los Angeles, where he writes, directs, and mentors the next generation of narrative nonfiction writers.</p>
+        <div class="gc-quote-wrap right">
+          <p class="gc-book-title">Road to Kosovo</p>
+          <p class="gc-quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."</p>
+          <p class="gc-attribution">— Publication Name</p>
         </div>
       </div>
-    `,
 
-    books: `
-      <h2 class="content-title">Books</h2>
-      <div class="divider"></div>
-      <a class="book-card" href="#" data-book="blood-diamonds">
-        <div class="book-thumb">BLOOD<br>DIAMONDS</div>
-        <div>
-          <div class="book-title">Blood Diamonds</div>
-          <div class="book-caption">Tracing conflict diamonds from Sierra Leone's brutal civil war to the world's jewelry counters. Adapted into the 2006 Warner Bros. feature film starring Leonardo DiCaprio.</div>
-        </div>
-      </a>
-      <a class="book-card" href="#" data-book="flawless">
-        <div class="book-thumb">FLAW-<br>LESS</div>
-        <div>
-          <div class="book-title">Flawless</div>
-          <div class="book-caption">Inside the largest diamond heist in history — $100 million stolen from Antwerp's diamond district in 2003. Adapted into a feature film.</div>
-        </div>
-      </a>
-      <a class="book-card" href="#" data-book="pot-inc">
-        <div class="book-thumb">POT<br>INC.</div>
-        <div>
-          <div class="book-title">Pot Inc.</div>
-          <div class="book-caption">An immersive investigation into the birth of America's legal marijuana industry, from underground growers to Wall Street.</div>
-        </div>
-      </a>
-      <a class="book-card" href="#" data-book="kosovo">
-        <div class="book-thumb">ROAD<br>TO K.</div>
-        <div>
-          <div class="book-title">Road to Kosovo</div>
-          <div class="book-caption">On-the-ground dispatches from the Balkans conflict — early narrative nonfiction from the post-Cold War front lines.</div>
-        </div>
-      </a>
-    `,
+    </div>
+  </main>
 
-    journalism: `
-      <h2 class="content-title">Journalism</h2>
-      <div class="divider"></div>
-      <div class="outlet-row"><span class="outlet-name">The New York Times</span><span class="outlet-tag">Investigation</span></div>
-      <div class="outlet-row"><span class="outlet-name">The Atlantic</span><span class="outlet-tag">Feature</span></div>
-      <div class="outlet-row"><span class="outlet-name">The Economist</span><span class="outlet-tag">Feature</span></div>
-      <div class="outlet-row"><span class="outlet-name">Foreign Policy</span><span class="outlet-tag">Feature</span></div>
-      <div class="outlet-row"><span class="outlet-name">The Guardian</span><span class="outlet-tag">Analysis</span></div>
-      <div class="outlet-row"><span class="outlet-name">The New Republic</span><span class="outlet-tag">Feature</span></div>
-      <div class="outlet-row"><span class="outlet-name">USA Today</span><span class="outlet-tag">Reporting</span></div>
-      <div class="outlet-row"><span class="outlet-name">San Francisco Chronicle</span><span class="outlet-tag">Reporting</span></div>
-      <div class="outlet-row"><span class="outlet-name">The Daily Beast</span><span class="outlet-tag">Feature</span></div>
-      <div class="outlet-row"><span class="outlet-name">Salon</span><span class="outlet-tag">Personal Essay</span></div>
-    `,
-
-    film: `
-      <h2 class="content-title">Film & Documentary</h2>
-      <div class="divider"></div>
-      <a class="book-card" href="#" data-film="hondros">
-        <div class="book-thumb">HON-<br>DROS</div>
-        <div>
-          <div class="book-title">Hondros</div>
-          <div class="book-caption">Award-winning feature documentary about Pulitzer Prize–nominated war photographer Chris Hondros. Directed and produced by Campbell. Festival circuit 2017.</div>
-        </div>
-      </a>
-      <div class="outlet-row"><span class="outlet-name">Award-Winning Video Journalism</span><span class="outlet-tag">Director</span></div>
-      <div class="outlet-row"><span class="outlet-name">Branded Documentary Content</span><span class="outlet-tag">Director / Producer</span></div>
-    `,
-
-    workshop: `
-      <h2 class="content-title">Workshop</h2>
-      <div class="divider"></div>
-      <a class="workshop-card" href="workshop/index.html">
-        <div class="workshop-eyebrow">Narrative Nonfiction</div>
-        <div class="workshop-title">The Art of the True Story</div>
-        <div class="workshop-desc">A mentorship-driven workshop for writers working at the intersection of journalism, memoir, and narrative craft. Built around the techniques behind longform investigations, book proposals, and documentary storytelling.</div>
-        <div class="workshop-cta">Visit the workshop <span class="arrow">→</span></div>
-      </a>
-    `
-  };
-
-  // ── Navigation logic ─────────────────────────────────────────────────
-  const content   = document.getElementById('content');
-  const navList   = document.getElementById('navList');
-  const nameLink  = document.getElementById('nameLink');
-  const carousels = document.getElementById('homeCarousels');
-
-  function showSection(key) {
-    carousels.style.display = 'none';
-    content.innerHTML = sections[key] || '';
-    content.appendChild(carousels);
-    carousels.style.display = 'none';
-  }
-
-  function showHome() {
-    content.innerHTML = '';
-    content.appendChild(carousels);
-    carousels.style.display = 'flex';
-  }
-
-  function closeAll() {
-    document.querySelectorAll('.nav-item').forEach(n => {
-      n.classList.remove('active', 'open');
-      n.setAttribute('aria-expanded', 'false');
-    });
-    document.querySelectorAll('.subitems').forEach(s => s.classList.remove('open'));
-  }
-
-  nameLink.addEventListener('click', e => {
-    e.preventDefault();
-    closeAll();
-    showSection('about');
-  });
-
-  navList.addEventListener('click', e => {
-    const item = e.target.closest('.nav-item');
-    if (!item) return;
-    const sec = item.dataset.section;
-    const wasOpen = item.classList.contains('open');
-    closeAll();
-    if (!wasOpen) {
-      item.classList.add('active');
-      const sub = document.getElementById('sub-' + sec);
-      if (sub) {
-        sub.classList.add('open');
-        item.classList.add('open');
-        item.setAttribute('aria-expanded', 'true');
-      }
-      showSection(sec);
-    } else {
-      showHome();
-    }
-  });
-</script>
+  <footer class="gc-footer">
+    <p class="gc-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </footer>
 
 </body>
 </html>
