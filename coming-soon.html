@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Greg Campbell</title>
+  <title>Coming Soon — Greg Campbell</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
@@ -49,10 +49,7 @@
       flex-wrap: wrap;
     }
 
-    /* ── DROPDOWN NAV ── */
-    .gc-nav-item {
-      position: relative;
-    }
+    .gc-nav-item { position: relative; }
 
     .gc-tag {
       font-family: 'Playfair Display', serif;
@@ -61,7 +58,6 @@
       color: #1a1a1a;
       text-decoration: none;
       border-bottom: 1px solid transparent;
-      padding-bottom: 1px;
       transition: border-color 0.2s;
       cursor: pointer;
       display: inline-block;
@@ -83,7 +79,6 @@
       z-index: 100;
       padding: 8px 0;
     }
-
     .gc-dropdown.open { display: block; }
     .gc-tag.active { border-bottom-color: #1a1a1a; }
 
@@ -101,40 +96,18 @@
     }
     .gc-dropdown a:hover { background: #ede9e3; }
 
-    /* ── BIO LAYOUT ── */
-    .gc-bio-wrap {
-      max-width: 1000px;
-      margin: 72px auto;
-      padding: 0 5%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: start;
+    /* ── COMING SOON ── */
+    .gc-coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      text-align: center;
+      padding: 80px 40px;
     }
 
-    /* Photo */
-    .gc-bio-photo {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background: #d8d4cc;
-    }
-
-    .gc-bio-photo img {
-      width: 100%;
-      height: 110%;
-      object-fit: cover;
-      object-position: center 35%;
-      display: block;
-      filter: grayscale(100%);
-    }
-
-    /* Copy */
-    .gc-bio-copy {
-      padding-top: 8px;
-    }
-
-    .gc-bio-label {
+    .gc-coming-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       letter-spacing: 0.16em;
@@ -143,31 +116,19 @@
       margin-bottom: 24px;
     }
 
-    .gc-bio-text {
+    .gc-coming-title {
       font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      line-height: 1.85;
+      font-style: italic;
+      font-size: 36px;
       color: #2a2a2a;
-      margin-bottom: 48px;
+      margin-bottom: 20px;
     }
 
-    /* Contact button */
-    .gc-contact-btn {
-      display: inline-block;
+    .gc-coming-sub {
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #1a1a1a;
-      text-decoration: none;
-      border: 1px solid #1a1a1a;
-      padding: 14px 32px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .gc-contact-btn:hover {
-      background: #1a1a1a;
-      color: #f5f2ee;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #999;
     }
 
     /* ── FOOTER ── */
@@ -175,7 +136,6 @@
       padding: 36px 80px 48px;
       text-align: center;
       border-top: 1px solid #ccc9c2;
-      margin-top: 8px;
     }
 
     .gc-footer-bio {
@@ -187,17 +147,10 @@
       margin: 0 auto;
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .gc-name { font-size: 28px; }
-      .gc-bio-wrap {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        margin: 48px auto;
-      }
-      .gc-bio-photo { aspect-ratio: 4/3; }
-      .gc-footer { padding: 32px 28px 40px; }
       .gc-dropdown { left: 0; transform: none; }
+      .gc-footer { padding: 32px 28px 40px; }
     }
   </style>
 </head>
@@ -260,18 +213,10 @@
   </header>
 
   <main>
-    <div class="gc-bio-wrap">
-
-      <div class="gc-bio-photo">
-        <img src="images/bio/BW_GC.jpg" alt="Greg Campbell">
-      </div>
-
-      <div class="gc-bio-copy">
-        <p class="gc-bio-label">About</p>
-        <p class="gc-bio-text">Greg Campbell is an award-winning documentary filmmaker, journalist and nonfiction author. Known for creative storytelling and tenacious reporting, Greg connects audiences to stories around the globe with humanity and wit, always seeking the universal human connection at the heart of them all. He also teaches an online narrative nonfiction workshop, mentoring the next generation of longform writers and journalists. He lives in Los Angeles.</p>
-        <a href="/cdn-cgi/l/email-protection#90c0dcd1d3d5d8dfdcd4d5c2d0f7fdf1f9fcbef3fffd" class="gc-contact-btn">Get in Touch</a>
-      </div>
-
+    <div class="gc-coming-soon">
+      <p class="gc-coming-label">Branded Content</p>
+      <p class="gc-coming-title">Coming Soon</p>
+      <p class="gc-coming-sub">Check back shortly.</p>
     </div>
   </main>
 
@@ -279,12 +224,11 @@
     <p class="gc-footer-bio">Author · Journalist · Filmmaker</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     document.querySelectorAll('.gc-nav-item').forEach(function(item) {
       var trigger = item.querySelector('.gc-tag');
       var dropdown = item.querySelector('.gc-dropdown');
       if (!trigger || !dropdown) return;
-
       trigger.addEventListener('click', function(e) {
         e.stopPropagation();
         var isOpen = dropdown.classList.contains('open');
@@ -296,6 +240,10 @@
         }
       });
     });
-
     document.addEventListener('click', function() {
-      document.querySelectorAll('.gc-dropdown').forEach(function(d) { d.classList.rem
+      document.querySelectorAll('.gc-dropdown').forEach(function(d) { d.classList.remove('open'); });
+      document.querySelectorAll('.gc-tag').forEach(function(t) { t.classList.remove('active'); });
+    });
+  </script>
+</body>
+</html>
