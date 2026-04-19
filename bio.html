@@ -288,8 +288,17 @@
       trigger.addEventListener('click', function(e) {
         e.stopPropagation();
         var isOpen = dropdown.classList.contains('open');
-        document.querySelectorAll('.gc-dropdown').forEach(function(d)  d.classList.remove('open');
+        document.querySelectorAll('.gc-dropdown').forEach(function(d) { d.classList.remove('open'); });
+        document.querySelectorAll('.gc-tag').forEach(function(t) { t.classList.remove('active'); });
+        if (!isOpen) {
+          dropdown.classList.add('open');
+          trigger.classList.add('active');
+        }
       });
+    });
+
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.gc-dropdown').forEach(function(d) { d.classList.remove('open'); });
       document.querySelectorAll('.gc-tag').forEach(function(t) { t.classList.remove('active'); });
     });
   </script>
